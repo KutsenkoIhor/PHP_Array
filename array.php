@@ -1,23 +1,30 @@
 <?php
 
-$cities = ['moscow', 'london', 'berlin', 'porto'];
-
-function apply(array $arr, string $operation, int $index = null, $value = null):array
+function isContinuousSequence (array $arr): bool
 {
-    if ($operation === 'reset') {
-        $arr = [];
+    $x = 1;
+    if (count($arr) <= 1) {
+        return false;
+    } else {
+        foreach ($arr as $index => $value) {
+            print_r($x . "\n");
+            $next_index = $index + 1;
+            if ($x === count($arr)) {
+                return true;
+            } elseif ($arr[$next_index] !== $value + 1) {
+                return false;
+            } else {
+                $x++;
+            }
+        }
     }
-    elseif ($operation === 'remove') {
-        unset($arr[$index]);
-    }
-    elseif ($operation === 'change') {
-        $arr[$index] = $value;
-    }
-    return $arr;
+    return true;
 }
 
-print_r(apply($cities, 'reset')); // []
 
-print_r(apply($cities, 'remove', 1)); // ['moscow', 'berlin', 'porto']
 
-print_r(apply($cities, 'change', 0, 'miami')); // ['miami', 'london', 'berlin', 'porto']
+var_dump(isContinuousSequence([10, 11, 12, 13]));     // true
+var_dump(isContinuousSequence([10, 11, 12, 14, 15])); // false
+var_dump(isContinuousSequence([1, 2, 2, 3]));         // false
+var_dump(isContinuousSequence([]));                   // false
+var_dump(isContinuousSequence([4]));                  // false
