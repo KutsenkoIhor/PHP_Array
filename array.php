@@ -4,12 +4,12 @@ function getSameCount(array $arrOne, array $arrTwo):int
 {
     $input = array_unique($arrOne);
 
-    $x = 0;
+    $count = 0;
     foreach ($input as $one) {
-        in_array($one, $arrTwo) ? $x++ : $x += 0;
+        in_array($one, $arrTwo) ? $count++ : $count += 0;
     }
     echo "\n";
-    return $x;
+    return $count;
 }
 
 print_r(getSameCount([], [])); // 0
