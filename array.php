@@ -1,30 +1,25 @@
 <?php
 
-function isContinuousSequence (array $arr): bool
+function getSameCount(array $arrOne, array $arrTwo):int
 {
-    $x = 1;
-    if (count($arr) <= 1) {
-        return false;
-    } else {
-        foreach ($arr as $index => $value) {
-            print_r($x . "\n");
-            $next_index = $index + 1;
-            if ($x === count($arr)) {
-                return true;
-            } elseif ($arr[$next_index] !== $value + 1) {
-                return false;
-            } else {
-                $x++;
-            }
-        }
+    $input = array_unique($arrOne);
+
+    $x = 0;
+    foreach ($input as $one) {
+        in_array($one, $arrTwo) ? $x++ : $x += 0;
     }
-    return true;
+    echo "\n";
+    return $x;
 }
 
+print_r(getSameCount([], [])); // 0
+print_r(getSameCount([4, 4], [4, 4])); // 1
+print_r(getSameCount([1, 10, 3], [10, 100, 35, 1])); // 2
+print_r(getSameCount([1, 3, 2, 2], [3, 1, 1, 2])); // 3
+print_r(getSameCount([5, 3, 3], ['one', 'two'])); // 0
+print_r(getSameCount([1, 2], [])); // 0
+
+//ПОЧЕМУ?
+print_r(getSameCount([0], ['one', 'two'])); // 0
 
 
-var_dump(isContinuousSequence([10, 11, 12, 13]));     // true
-var_dump(isContinuousSequence([10, 11, 12, 14, 15])); // false
-var_dump(isContinuousSequence([1, 2, 2, 3]));         // false
-var_dump(isContinuousSequence([]));                   // false
-var_dump(isContinuousSequence([4]));                  // false

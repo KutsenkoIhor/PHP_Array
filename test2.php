@@ -1,26 +1,31 @@
 <?php
 
-function isContinuousSequence($coll)
-{
-    if (count($coll) <= 1) {
-        print_r("rr");
-        return false;
-    }
-    $start = $coll[0];
-    print_r($start);
-    foreach ($coll as $i => $item) {
-        if ($start + $i !== $item) {
-            return false;
-        }
-    }
+$people = [
+    'Ivan' => ['age' => 21, 'weight' => 53],
+    'Ihor' => ['age' => 22, 'weight' => 73],
+    'Sasha' => ['age' => 18, 'weight' => 63],
+];
 
-    return true;
-}
+$arr = ['time' => '23:17'];
 
+print_r($people['Ihor']['age']);
+echo "\n";
+print_r("Сейчас у нас $arr[time] времени.");
+echo "\n";
+print_r("Я в свои {$people['Ihor']['age']} года имел вес {$people['Ihor']['weight']} в кг.");
+echo "\n";
+//слияние масивов
+$arr1 = [12, 56];
+$arr2 = [56 => 67, 87];
+$arr3 = $arr1 + $arr2;
+print_r($arr3 );
+echo "\n";
+$arr4 = array_merge($arr1, $arr2);
+print_r($arr4);
+echo "\n";
 
-
-var_dump(isContinuousSequence([10, 11, 12, 13]));     // true
-var_dump(isContinuousSequence([10, 11, 12, 14, 15])); // false
-var_dump(isContinuousSequence([1, 2, 2, 3]));         // false
-var_dump(isContinuousSequence([]));                   // false
-var_dump(isContinuousSequence([4]));                  // false
+//isset() проверка
+//is_array()
+//in_array()
+//array_key_exists()
+//unset
