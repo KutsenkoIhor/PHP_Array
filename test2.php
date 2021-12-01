@@ -1,31 +1,42 @@
 <?php
 
-$people = [
-    'Ivan' => ['age' => 21, 'weight' => 53],
-    'Ihor' => ['age' => 22, 'weight' => 73],
-    'Sasha' => ['age' => 18, 'weight' => 63],
-];
+function getIntersectionOfSortedArray(array $arr1, array $arr2): array
+{
+    $resArr = [];
+    foreach ($arr1 as $value1) {
+        foreach ($arr2 as $value2) {
+            if ($value1 === $value2) {
+                $resArr[] = $value2;
+            }
+        }
+    }
+    return $resArr;
+}
 
-$arr = ['time' => '23:17'];
+function getIntersectionOfSortedArrayy(array $arr1, array $arr2): array
+{
+    $resArr = [];
+    $index1 = 0;
+    $index2 = 0;
+    while (($index1 < count($arr1)) && ($index2 < count($arr2))) {
+        if ($arr1[$index1] === $arr2[$index2]) {
+            $resArr[] = $arr2[$index2];
+            $index1++;
+            $index2++;
+        } elseif ($arr1[$index1] > $arr2[$index2]) {
+            $index2++;
+        } elseif ($arr1[$index1] < $arr2[$index2]) {
+            $index1++;
+        }
+    }
+    return $resArr;
+}
 
-print_r($people['Ihor']['age']);
-echo "\n";
-print_r("Сейчас у нас $arr[time] времени.");
-echo "\n";
-print_r("Я в свои {$people['Ihor']['age']} года имел вес {$people['Ihor']['weight']} в кг.");
-echo "\n";
-//слияние масивов
-$arr1 = [12, 56];
-$arr2 = [56 => 67, 87];
-$arr3 = $arr1 + $arr2;
-print_r($arr3 );
-echo "\n";
-$arr4 = array_merge($arr1, $arr2);
-print_r($arr4);
-echo "\n";
 
-//isset() проверка
-//is_array()
-//in_array()
-//array_key_exists()
-//unset
+//print_r(getIntersectionOfSortedArray([10, 11, 24], [10, 13, 14, 18, 24, 30])); // [10, 24]
+//print_r(getIntersectionOfSortedArray([10, 11, 24], [-2, 3, 4])); // []
+//print_r(getIntersectionOfSortedArray([], [2])); // []
+
+print_r(getIntersectionOfSortedArrayy([10, 11, 24], [10, 13, 14, 18, 24, 30])); // [10, 24]
+print_r(getIntersectionOfSortedArrayy([10, 11, 24], [-2, 3, 4])); // []
+print_r(getIntersectionOfSortedArrayy([], [2])); // []

@@ -1,25 +1,21 @@
 <?php
 
-function getSameCount(array $arrOne, array $arrTwo):int
+function checkIfBalanced(string $arr): bool
 {
-    $input = array_unique($arrOne);
-
-    $count = 0;
-    foreach ($input as $one) {
-        in_array($one, $arrTwo) ? $count++ : $count += 0;
+    $stack = [];
+    for ($i = 0, $len = strlen($arr); $i < $len; $i++) {
+        if ($arr[$i] === "(") {
+            array_push($stack, $arr[$i]);
+        } elseif ($arr[$i] === ")") {
+            $temp = array_pop($stack);
+            if (($temp . $arr[$i]) !== '()') {
+                return false;
+            }
+        }
     }
-    echo "\n";
-    return $count;
+    return count($stack) === 0;
 }
 
-print_r(getSameCount([], [])); // 0
-print_r(getSameCount([4, 4], [4, 4])); // 1
-print_r(getSameCount([1, 10, 3], [10, 100, 35, 1])); // 2
-print_r(getSameCount([1, 3, 2, 2], [3, 1, 1, 2])); // 3
-print_r(getSameCount([5, 3, 3], ['one', 'two'])); // 0
-print_r(getSameCount([1, 2], [])); // 0
-
-//ПОЧЕМУ?
-print_r(getSameCount([0], ['one', 'two'])); // 0
-
-
+var_dump(checkIfBalanced('(5 + 6) * (7 + 8)/(4 +3)')); // true
+var_dump(checkIfBalanced('(4 + 3))')); // false
+var_dump(checkIfBalanced('())(')); // false
